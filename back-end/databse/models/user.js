@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    code:{
+      type:String,
+      default:null
+
+    },
     subscriptions: [
       {
         type: String,
