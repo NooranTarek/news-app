@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export function dbConnection(logger) {
   mongoose.set("strictQuery", true);
-  mongoose.connect("mongodb://127.0.0.1:27017/newsapp")
+  mongoose.connect(process.env.DB_ONLINE)
     .then(() => {
       logger.info("Database connection established successfully");
     })

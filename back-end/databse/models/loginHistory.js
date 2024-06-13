@@ -12,6 +12,5 @@ const loginHistorySchema = new mongoose.Schema({
     success: Boolean
 });
 
-const LoginHistory = mongoose.model('loginHistory', loginHistorySchema);
+export const LoginHistory = mongoose.model('loginHistory', loginHistorySchema);
 
-export default LoginHistory;
