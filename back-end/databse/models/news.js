@@ -1,15 +1,17 @@
 import mongoose from 'mongoose';
 
-const sourceSchema = new mongoose.Schema({
+const newsSchema = new mongoose.Schema({
     sourceId: {
         type: String,
-        unique: true,
         required: true
-    },
-    name: {
+      },
+    author: {
+        type: String
+      },
+    title: {
         type: String,
         required: true
-    },
+      },
     description: {
         type: String
       },
@@ -17,20 +19,17 @@ const sourceSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-    category: {
+    urlToImage: {
         type: String
       },
-    language: {
-        type: String
+    publishedAt: {
+        type: Date,
+        required: true
       },
-    country: {
+    content: {
         type: String
-      },
-    subscribers: {
-        type: Number,
-        default: 0
       }
     });
 
-export const Source = mongoose.model('source', sourceSchema);
+export const News = mongoose.model('news', newsSchema);
 

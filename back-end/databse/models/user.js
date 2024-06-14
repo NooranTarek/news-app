@@ -20,11 +20,10 @@ const userSchema = new mongoose.Schema(
       default:null
 
     },
-    subscriptions: [
-      {
-        type: String,
-      },
-    ],
+    subscribedSources: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Source'
+    }]
   },
   { timestamps: true }
 );
