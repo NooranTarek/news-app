@@ -7,6 +7,8 @@ import { dbConnection } from './databse/dbConnection.js';
 import userRouter from './src/modules/user/user.router.js';
 import cors from 'cors';
 import sourceRouter from './src/modules/source/source.router.js';
+import newsRouter from './src/modules/news/news.router.js';
+import historyRouter from './src/modules/history/history.router.js';
 
 const app = express();
 export const logger = pino({
@@ -30,6 +32,9 @@ dotenv.config();
 //_____________________________________________________________________________
 app.use('/users',userRouter);
 app.use('/sources',sourceRouter);
+app.use('/news',newsRouter);
+app.use('/history',historyRouter);
+
 
 dbConnection(logger);
 

@@ -5,6 +5,7 @@ import {User} from '../../../databse/models/user.js'
 import { catchAsyncErr } from "../../utilities/catchErr.js";
 import { logger } from "../../../index.js";
 import {sendCodeEmail} from '../../utilities/forget_email.js'
+import { saveLoginAttempt } from "../history/history.controller.js";
 uuidv4();
 
 //====================1)signUp ====================
@@ -38,14 +39,15 @@ const signup = catchAsyncErr(async (req, res, next) => {
 const signin = catchAsyncErr(async (req, res) => {
   const { email, password } = req.body;
   let user = await User.findOne({ email });
-
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.json({ message: "incorrect email or password" });
+  const success = user && await bcrypt.compare(password, user.password);
+  await saveLoginAttempt(email, success);
+  if (!user || !success) {
+    return res.json({ message: "Incorrect email or password" });
   }
-  user["password"] = undefined;
-  var token = jwt.sign({ user }, process.env.JWT_KEY);
-  var role=user.role;
-  res.json({ message: "login successfully", token,role });
+  user.password = undefined;
+  const token = jwt.sign({ user }, process.env.JWT_KEY);
+  const role = user.role;
+  res.json({ message: "Login successful", token, role });
 });
 
 

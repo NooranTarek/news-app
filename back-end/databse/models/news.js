@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 const newsSchema = new mongoose.Schema({
     sourceId: {
         type: String,
-        required: true
+        required: true,
+        ref: 'Source'
+
       },
     author: {
         type: String
