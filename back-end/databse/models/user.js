@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
 
     },
     subscribedSources: [{
-      type: mongoose.Schema.Types.ObjectId,
+      type: String, 
       ref: 'Source'
     }]
   },

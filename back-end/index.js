@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import { dbConnection } from './databse/dbConnection.js';
 import userRouter from './src/modules/user/user.router.js';
 import cors from 'cors';
+import sourceRouter from './src/modules/source/source.router.js';
 
 const app = express();
 export const logger = pino({
@@ -28,6 +29,8 @@ dotenv.config();
 
 //_____________________________________________________________________________
 app.use('/users',userRouter);
+app.use('/sources',sourceRouter);
+
 dbConnection(logger);
 
 app.use((error, req, res, next) => {
