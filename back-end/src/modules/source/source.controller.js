@@ -84,8 +84,14 @@ const getAllSources = catchAsyncErr(async (req, res) => {
   
     res.status(200).json(sources);
   });
+ const getPopularSources = catchAsyncErr(async (req, res) => {
+    const response = await Source.find().sort({ subscribers: -1 }).limit(5);
+  
+    res.status(200).json(response);
+  });
 export {
   subscribeToSource,
   unsubscribeFromSource,
-  getAllSources
+  getAllSources,
+  getPopularSources
 };
